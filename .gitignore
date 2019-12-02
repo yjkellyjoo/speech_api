@@ -1,2 +1,3 @@
-./original
-./result
+original/*
+result/*
+.idea/*
