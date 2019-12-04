@@ -1,3 +1,6 @@
-original/*
 result/*
 .idea/*
+audio_source/*
+audio_upload/*
+bucket.txt
+*.json
