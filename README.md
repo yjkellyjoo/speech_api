@@ -34,3 +34,10 @@ When Terminal pops up, type in the following:
 ###3. Audio pre-processing
  - Do not use automatic gain control (AGC).
  - Noise reduction processing should be disabled.
+ 
+
+## Commonly asked Questions
+### 1. ffmpeg error
+It occurs because ffmpeg is not installed. 
+http://blog.gregzaal.com/how-to-install-ffmpeg-on-windows/
+
