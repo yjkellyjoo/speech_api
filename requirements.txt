@@ -1,5 +1,5 @@
 google-cloud-speech
+google-cloud-storage
 google-api-python-client
-pydub
-librosa
 soundfile
+pydub

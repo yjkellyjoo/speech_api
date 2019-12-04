@@ -1,37 +1,51 @@
-from pydub import AudioSegment
 import wave
+import soundfile as sf
+from pydub import AudioSegment
+
 from google.cloud import storage
 
 import os
 
-
-audio_dir = os.getcwd() + '/audio_source/'
+source_dir = os.getcwd() + '/audio_source/'
+upload_dir = os.getcwd() + '/audio_upload/'
 bucketname = open(os.getcwd()+'/bucket.txt', "r").readline()
 json_file_name = 'speech-17e53241af23.json'
 storage_uri = os.getcwd() + '/uri.txt'
 
 
-def mp3_to_wav(audio_file_name):
-    if audio_file_name.split('.')[-1] == 'mp3':
-        audio_file_path = audio_dir + audio_file_name
+def to_wav(audio_file_name):
+    extension = audio_file_name.split('.')[-1]
 
-        sound = AudioSegment.from_mp3(audio_file_path)
-        audio_file_path = audio_file_path.split('.')[0] + '.wav'
-        audio_file_name = audio_file_name.split('.')[0] + '.wav'
-        sound.export(audio_file_path, format="wav")
+    # paths for audio files
+    source_file_path = source_dir + audio_file_name
+    audio_file_name = audio_file_name.split('.')[0] + '.wav'
+    upload_file_path = upload_dir + audio_file_name
 
-    return audio_file_name
+    # convert it to wav and save it in upload_dir
+    if extension == 'mp3':
+        sound = AudioSegment.from_mp3(source_file_path)
+        sound.export(upload_file_path, format="wav")
+    if extension == 'flac':
+        sound, frame_rate = sf.read(source_file_path)
+        sf.write(upload_file_path, sound, frame_rate)
+
+    frame_rate, channels = frame_rate_channel(audio_file_name)
+    if channels > 1:
+        stereo_to_mono(audio_file_name)
+
+    return audio_file_name, frame_rate
 
 
 def stereo_to_mono(audio_file_name):
-    audio_file_name = audio_dir + audio_file_name
+    audio_file_name = upload_dir + audio_file_name
+
     sound = AudioSegment.from_wav(audio_file_name)
     sound = sound.set_channels(1)
     sound.export(audio_file_name, format="wav")
 
 
 def frame_rate_channel(audio_file_name):
-    audio_file_name = audio_dir + audio_file_name
+    audio_file_name = upload_dir + audio_file_name
     with wave.open(audio_file_name, "rb") as wave_file:
         frame_rate = wave_file.getframerate()
         channels = wave_file.getnchannels()
@@ -51,32 +65,34 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
 def upload_audio(audio_file):
     print('uploading {} ...'.format(audio_file))
 
-    audio_file = mp3_to_wav(audio_file)
-    frame_rate, channels = frame_rate_channel(audio_file)
-    if channels > 1:
-        stereo_to_mono(audio_file)
+    # convert to wav, if not already wav.
+    if audio_file.split('.')[-1] != 'wav':
+        audio_file, frame_rate = to_wav(audio_file)
+    else:
+        frame_rate = frame_rate_channel(audio_file)
 
+    # variables for upload
     bucket_name = bucketname
-    source_file_name = audio_dir + audio_file
+    source_file_name = upload_dir + audio_file
     destination_blob_name = audio_file
 
+    # upload
     upload_blob(bucket_name, source_file_name, destination_blob_name)
 
-    gcs_uri = 'gs://' + bucketname + '/' + audio_file
-
+    gcs_uri = 'gs://' + bucketname + '/' + audio_file + '\t' + str(frame_rate)
     return gcs_uri
 
 
 def main():
     uri_file = open(storage_uri, 'w')
 
-    audio_list = [e for e in os.listdir(audio_dir) if e[0] != '.']
+    audio_list = [e for e in os.listdir(source_dir) if e[0] != '.']
     for audio_file in audio_list:
-        if os.path.isfile(audio_dir + audio_file):
+        if os.path.isfile(source_dir + audio_file):
             gcs_uri = upload_audio(audio_file)
 
             print('uri: {}'.format(gcs_uri))
-            uri_file.write(gcs_uri)
+            uri_file.write(gcs_uri + '\n')
 
     uri_file.close()
 

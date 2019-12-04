@@ -12,7 +12,7 @@ storage_uri = os.getcwd() + '/uri.txt'
 json_file_name = 'speech-17e53241af23.json'
 
 
-def transcribe_file(storage_uri):
+def transcribe_file(storage_uri, frame_rate):
     # Notification
     print("Working on: {} ...".format(storage_uri))
 
@@ -24,15 +24,14 @@ def transcribe_file(storage_uri):
     client = speech.SpeechClient(credentials=cred)
 
     # Variables for the setting
-    encoding = enums.RecognitionConfig.AudioEncoding.FLAC
-    sample_rate_hertz = 48000
-    language_code='ko-KR'
+    encoding = enums.RecognitionConfig.AudioEncoding.LINEAR16
+    language_code = 'ko-KR'
 
     # Loads the audio into memory
     audio = {"uri": storage_uri}
     config = types.RecognitionConfig(
         encoding=encoding,
-        sample_rate_hertz=sample_rate_hertz,
+        sample_rate_hertz=int(frame_rate),
         language_code=language_code)
 
     # Detects speech in the audio file
@@ -62,7 +61,10 @@ def main():
     f = open(storage_uri, "r")
 
     for file_name in f.readlines():
-        transcript = transcribe_file(file_name)
+
+        file_name, frame_rate = file_name.split('\t')
+        frame_rate = frame_rate.rstrip()
+        transcript = transcribe_file(file_name, frame_rate)
 
         file_name = file_name.split('/')[-1].split('.')[0]
         transcript_file = open(result_dir + file_name + '.txt', "w")
