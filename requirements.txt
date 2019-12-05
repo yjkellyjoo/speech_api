@@ -1,5 +1,4 @@
 google-cloud-speech
 google-cloud-storage
-google-api-python-client
 soundfile
 pydub

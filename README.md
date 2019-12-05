@@ -10,13 +10,8 @@ https://cloud.google.com/speech-to-text/docs/data-logging-terms
 
 
 ##Setup
-###Windows OS
-
-###Mac OS
-1. Install Python 3 if you do not already have it installed. 
-2. Go to `Spotlight Search (Cmd + Space)` and open `Terminal`.
-When Terminal pops up, type in the following: 
-> pip install -r requirements.txt
+1. Install ffmpeg.
+http://blog.gregzaal.com/how-to-install-ffmpeg-on-windows/
 
 
 ##How to Use
@@ -25,8 +20,8 @@ When Terminal pops up, type in the following:
 
 ##Caution
 ###1. Recording Format
- - Using a lossless codec (FLAC or LINEAR16) is recommended.
- - If not, WAV or MP3 files are acceptable.
+ - Using a lossless codec (WAV or FLAC) is recommended.
+ - If not, MP3 files are acceptable.
 
 ###2. The clearer your recording, the better the result.
  - If multiple people are talking at the same time, or at different volumes, they may be interpreted as background noise and ignored.
@@ -36,7 +31,7 @@ When Terminal pops up, type in the following:
  - Noise reduction processing should be disabled.
  
 
-## Commonly asked Questions
+## Frequently asked Questions
 ### 1. ffmpeg error
 It occurs because ffmpeg is not installed. 
 http://blog.gregzaal.com/how-to-install-ffmpeg-on-windows/

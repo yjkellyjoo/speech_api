@@ -4,3 +4,4 @@ audio_source/*
 audio_upload/*
 bucket.txt
 *.json
+pyenv/*
