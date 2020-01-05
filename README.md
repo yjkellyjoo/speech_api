@@ -33,6 +33,5 @@ http://blog.gregzaal.com/how-to-install-ffmpeg-on-windows/
 
 ## Frequently asked Questions
 ### 1. ffmpeg error
-It occurs because ffmpeg is not installed. 
+It occurs because ffmpeg is not installed. Follow the instructions from the following link to install ffmpeg.
 http://blog.gregzaal.com/how-to-install-ffmpeg-on-windows/
-
