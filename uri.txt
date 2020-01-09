@@ -1,6 +1,0 @@
-gs://yjkellyjoo-speech-02/conversacao_em_coreano_page_035_ye___livros.wav	44100
-gs://yjkellyjoo-speech-02/conversacao_em_coreano_page_147_conv_falacoreano___livros.wav	44100
-gs://yjkellyjoo-speech-02/conversacao_em_coreano_page_061_jiut___livros.wav	44100
-gs://yjkellyjoo-speech-02/sample.wav	48000
-gs://yjkellyjoo-speech-02/conversacao_em_coreano_page_099_conv_ondefica___livros.wav	44100
-gs://yjkellyjoo-speech-02/conversacao_em_coreano_page_120_voca_profissao___livros.wav	44100
