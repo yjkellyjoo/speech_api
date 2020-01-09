@@ -9,7 +9,7 @@ import os
 source_dir = os.getcwd() + '/audio_source/'
 upload_dir = os.getcwd() + '/audio_upload/'
 bucketname = open(os.getcwd()+'/bucket.txt', "r").readline()
-json_file_name = 'speech-17e53241af23.json'
+json_file_name = 'speech-api-project.json'
 storage_uri = os.getcwd() + '/uri.txt'
 
 

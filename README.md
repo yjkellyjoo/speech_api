@@ -1,5 +1,6 @@
 # Speech-to-Text converter
 
+
 ##Data privacy and security
 This program uses Google Speech-to-Text API with Data Logging disabled, which means your audio file data will not be collected. 
 
@@ -26,6 +27,7 @@ When it's run,
 ### 2. Run transcriber
 When it's run,
  
+
 
 ##Caution
 ###1. Recording Format
