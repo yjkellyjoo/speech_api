@@ -5,3 +5,5 @@ audio_upload/*
 bucket.txt
 *.json
 pyenv/*
+venv/*
+/uri.txt

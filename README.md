@@ -13,12 +13,15 @@ https://cloud.google.com/speech-to-text/docs/data-logging-terms
 ###1. Install ffmpeg
 Following link shows you how to install ffmpeg: http://blog.gregzaal.com/how-to-install-ffmpeg-on-windows/
 Make sure to reboot your machine after installation. 
+
 ###2. Setup your Google Cloud Platform information
 Two files from your account are required:
 1. A txt file containing your bucket's name. 
 2. A json file containing your project's information.
 
-###3. 
+###3. Make audio_source folder
+The audio recording files you wish to convert must be saved into a folder named 'audio_source'. This folder must be placed in the same location as the uploader execution file. 
+
 
 
 ##How to Use

@@ -6,26 +6,26 @@ from google.cloud import storage
 
 import os
 
-source_dir = os.getcwd() + '/audio_source/'
-upload_dir = os.getcwd() + '/audio_upload/'
-bucketname = open(os.getcwd()+'/bucket.txt', "r").readline()
+source_dir = os.path.join(os.getcwd(), 'audio_source')
+upload_dir = os.path.join(os.getcwd(), 'audio_upload')
+bucketname = open(os.path.join(os.getcwd(), 'bucket.txt'), "r").readline()
 json_file_name = 'speech-api-project.json'
-storage_uri = os.getcwd() + '/uri.txt'
+storage_uri = os.path.join(os.getcwd(), 'uri.txt')
 
 
 def to_wav(audio_file_name):
     extension = audio_file_name.split('.')[-1]
 
     # paths for audio files
-    source_file_path = source_dir + audio_file_name
+    source_file_path = os.path.join(source_dir, audio_file_name)
     audio_file_name = audio_file_name.split('.')[0] + '.wav'
-    upload_file_path = upload_dir + audio_file_name
+    upload_file_path = os.path.join(upload_dir, audio_file_name)
 
     # convert it to wav and save it in upload_dir
     if extension == 'mp3':
         sound = AudioSegment.from_mp3(source_file_path)
         sound.export(upload_file_path, format="wav")
-    if extension == 'flac':
+    if extension == 'flac':     #TODO: FLAC convert error? uri 생성이 안됨
         sound, frame_rate = sf.read(source_file_path)
         sf.write(upload_file_path, sound, frame_rate)
 
@@ -37,7 +37,7 @@ def to_wav(audio_file_name):
 
 
 def stereo_to_mono(audio_file_name):
-    audio_file_name = upload_dir + audio_file_name
+    audio_file_name = os.path.join(upload_dir, audio_file_name)
 
     sound = AudioSegment.from_wav(audio_file_name)
     sound = sound.set_channels(1)
@@ -45,7 +45,7 @@ def stereo_to_mono(audio_file_name):
 
 
 def frame_rate_channel(audio_file_name):
-    audio_file_name = upload_dir + audio_file_name
+    audio_file_name = os.path.join(upload_dir, audio_file_name)
     with wave.open(audio_file_name, "rb") as wave_file:
         frame_rate = wave_file.getframerate()
         channels = wave_file.getnchannels()
@@ -73,7 +73,7 @@ def upload_audio(audio_file):
 
     # variables for upload
     bucket_name = bucketname
-    source_file_name = upload_dir + audio_file
+    source_file_name = os.path.join(upload_dir, audio_file)
     destination_blob_name = audio_file
 
     # upload
@@ -84,15 +84,15 @@ def upload_audio(audio_file):
 
 
 def main():
-    uri_file = open(storage_uri, 'w')
+    uri_file = open(storage_uri, 'w+')
 
     audio_list = [e for e in os.listdir(source_dir) if e[0] != '.']
     for audio_file in audio_list:
-        if os.path.isfile(source_dir + audio_file):
+        if os.path.isfile(os.path.join(source_dir, audio_file)):
             gcs_uri = upload_audio(audio_file)
 
             print('uri: {}'.format(gcs_uri))
-            uri_file.write(gcs_uri + '\n')
+            uri_file.write(gcs_uri + '\n')      #TODO: uri_file open까진 되는거 같은데 왜 쓰기가 안되는거지!!!!!
 
     uri_file.close()
 
