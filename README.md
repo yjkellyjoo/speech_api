@@ -19,9 +19,13 @@ Two files from your account are required:
 1. A txt file containing your bucket's name. 
 2. A json file containing your project's information.
 
-###3. Make audio_source folder
-The audio recording files you wish to convert must be saved into a folder named 'audio_source'. This folder must be placed in the same location as the uploader execution file. 
-
+###3. Make two new folders
+1. audio_source
+The audio recording files you wish to convert must be saved into a folder named 'audio_source'. 
+This folder must be placed in the same location as the execution files. 
+2. result
+The resulting text files will be created into a folder named 'result'.
+This folder must be placed in the same location as the execution files.
 
 
 ##How to Use

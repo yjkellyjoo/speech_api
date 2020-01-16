@@ -78,4 +78,4 @@ def main():
 
 
 main()
-input()
+input("Finished transcribing process. Press Enter to exit...")

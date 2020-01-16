@@ -98,4 +98,4 @@ def main():
 
 
 main()
-input("Finished process. Press Enter to exit...")
+input("Finished uploading process. Press Enter to exit...")
