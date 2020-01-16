@@ -98,4 +98,4 @@ def main():
 
 
 main()
-input()
+input("Finished process. Press Enter to exit...")
