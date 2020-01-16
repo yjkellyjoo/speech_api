@@ -25,8 +25,8 @@ def to_wav(audio_file_name):
     if extension == 'mp3':
         sound = AudioSegment.from_mp3(source_file_path)
         sound.export(upload_file_path, format="wav")
-    if extension == 'flac':     #TODO: FLAC convert error? uri 생성이 안됨
-        sound, frame_rate = sf.read(source_file_path)
+    elif extension == 'flac':     #TODO: FLAC convert error? uri 생성이 안됨
+        sound, frame_rate = sf.read(source_file_path)       ##soundfile error?
         sf.write(upload_file_path, sound, frame_rate)
 
     frame_rate, channels = frame_rate_channel(audio_file_name)
@@ -92,7 +92,7 @@ def main():
             gcs_uri = upload_audio(audio_file)
 
             print('uri: {}'.format(gcs_uri))
-            uri_file.write(gcs_uri + '\n')      #TODO: uri_file open까진 되는거 같은데 왜 쓰기가 안되는거지!!!!!
+            uri_file.write(gcs_uri + '\n')      #TODO: uri_file open까진 되는거 같은데 (됨 확인) 왜 쓰기가 안되는거지!!!!!
 
     uri_file.close()
 
