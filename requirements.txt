@@ -2,3 +2,16 @@ google-cloud-speech
 google-cloud-storage
 soundfile
 pydub
+
+# Instructions for making executable files
+## Command for Mac
+1. Open terminal in the project folder (with venv).
+2. Activate the venv
+    MAC    > $ source env/bin/activate
+    WINDOWS    > $ .\env\Scripts\activate
+3. If pyinstaller not installed, install
+    > $ pip install pyinstaller
+4. Make exe using pyinstaller.
+    > $ pyinstaller --noconsole --onefile /path/to/yourscript.py
+
+### CAUTION - use the latest Macholib version for using pyinstaller on Mac OS.

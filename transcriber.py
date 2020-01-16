@@ -9,7 +9,7 @@ from google.cloud.speech import types
 
 result_dir = os.getcwd() + '/result/'
 storage_uri = os.getcwd() + '/uri.txt'
-json_file_name = 'speech-17e53241af23.json'
+json_file_name = 'speech-api-project.json'
 
 
 def transcribe_file(storage_uri, frame_rate):
