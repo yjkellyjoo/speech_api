@@ -1,6 +1,7 @@
 google-cloud-speech
 google-cloud-storage
 soundfile
+numpy
 pydub
 
 # Instructions for making executable files

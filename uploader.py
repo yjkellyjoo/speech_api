@@ -5,12 +5,18 @@ from pydub import AudioSegment
 from google.cloud import storage
 
 import os
+import sys
 
-source_dir = os.path.join(os.getcwd(), 'audio_source')
-upload_dir = os.path.join(os.getcwd(), 'audio_upload')
-bucketname = open(os.path.join(os.getcwd(), 'bucket.txt'), "r").readline()
+if getattr(sys, 'frozen', False):
+    app_path = os.path.dirname(sys.executable)
+else:
+    app_path = os.path.dirname(__file__)
+
+source_dir = os.path.join(app_path, 'audio_source')
+upload_dir = os.path.join(app_path, 'audio_upload')
+bucketname = open(os.path.join(app_path, 'bucket.txt'), "r").readline()
 json_file_name = 'speech-api-project.json'
-storage_uri = os.path.join(os.getcwd(), 'uri.txt')
+storage_uri = os.path.join(app_path, 'uri.txt')
 
 
 def to_wav(audio_file_name):
@@ -98,4 +104,4 @@ def main():
 
 
 main()
-input("Finished uploading process. Press Enter to exit...")
+input("---\n---\nFinished uploading process. Press Enter to exit...")

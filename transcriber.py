@@ -1,4 +1,5 @@
 import os
+import sys
 
 """Transcribe the given audio file."""
 from google.cloud import speech
@@ -6,9 +7,13 @@ from google.oauth2 import service_account
 from google.cloud.speech import enums
 from google.cloud.speech import types
 
+if getattr(sys, 'frozen', False):
+    app_path = os.path.dirname(sys.executable)
+else:
+    app_path = os.path.dirname(__file__)
 
-result_dir = os.getcwd() + '/result/'
-storage_uri = os.getcwd() + '/uri.txt'
+result_dir = app_path + '/result/'
+storage_uri = app_path + '/uri.txt'
 json_file_name = 'speech-api-project.json'
 
 
@@ -78,4 +83,4 @@ def main():
 
 
 main()
-input("Finished transcribing process. Press Enter to exit...")
+input("---\n---\nFinished transcribing process. Press Enter to exit...")
