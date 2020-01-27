@@ -1,8 +1,8 @@
-google-cloud-speech
-google-cloud-storage
-soundfile
-numpy
-pydub
+google-cloud-speech==1.3.1
+google-cloud-storage==1.25.0
+soundfile==0.9.0.post1
+numpy==1.18.1
+pydub==0.23.1
 
 # Instructions for making executable files
 ## Command for Mac
@@ -11,8 +11,8 @@ pydub
     MAC    > $ source env/bin/activate
     WINDOWS    > $ .\env\Scripts\activate
 3. If pyinstaller not installed, install
-    > $ pip install pyinstaller
+    > $ pip install pyinstaller==3.6
 4. Make exe using pyinstaller.
-    > $ pyinstaller --noconsole --onefile /path/to/yourscript.py
+    > $ pyinstaller --noconsole (or -w) --onefile (or -F) /path/to/yourscript.py
 
 ### CAUTION - use the latest Macholib version for using pyinstaller on Mac OS.
